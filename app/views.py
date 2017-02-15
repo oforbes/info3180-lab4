@@ -8,6 +8,16 @@ import os
 from app import app
 from flask import render_template, request, redirect, url_for, flash, session, abort, jsonify
 from werkzeug.utils import secure_filename
+from flask import Flask
+
+USERNAME = 'admin'
+PASSWORD = 'password123'
+SECRET_KEY = 'Sup3r$3cretkey'
+
+app.config.from_object(__name__)
+UPLOAD_FOLDER = './app/static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Config Values
 
 
 ###
@@ -30,7 +40,7 @@ def add_file():
     if not session.get('logged_in'):
         abort(401)
 
-    file_folder = ''
+    file_folder = UPLOAD_FOLDER
 
     if request.method == 'POST':
         file = request.files['file']
