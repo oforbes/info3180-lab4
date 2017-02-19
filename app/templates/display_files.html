@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block main %}
+    <div class="container">
+
+    <div><h2>List of Files</h2></div>
+    {% for x in lst %}
+        {%if x.lower().split('.')[-1] == 'jpg' or x.lower().split('.')[-1] == 'jpeg'%}
+            <div class="file"> <img src={{ url_for('static',filename= "uploads/"+ x )}} height="190" width="190"> </div>
+            {% else %}
+                <li> {{ x }} </li>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

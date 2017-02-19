@@ -52,6 +52,17 @@ def add_file():
 
     return render_template('add_file.html')
 
+@app.route('/filelisting')
+def list_files():
+    """list the files in a directory"""
+    lst = []
+    rootdir = os.getcwd()
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads/'):
+        for file in files:
+           lst.append(file)
+        return render_template("display_files.html",lst=lst)
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
